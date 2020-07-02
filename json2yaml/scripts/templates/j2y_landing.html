@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title> YAML to JSON</title>
+    <head>
+        <link href="../static/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>JSON to YAML Converter</h1>
+    <body>
+        <h3>Place your JSON file here</h3>
+
+        <div class="container">  
+            <form action="{{url_for('convert_2_yaml')}}" method="Post">
+                <textarea rows = "50" cols = "75" name = "json_text"></textarea><br>
+                <button type="link"> Convert JSON to YAML</button>
+            </form>
+        
+            
+        </div>    
+        </body>
+</html>
