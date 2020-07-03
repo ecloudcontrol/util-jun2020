@@ -1,6 +1,6 @@
 1. Download the the code and install the following pip libraries: flask, pyyaml, json.
 
-2. The file structure should be as follows:
+2. The file structure should be as follows(must be viewed in raw or blame mode):
 
 website
   |--static
