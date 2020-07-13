@@ -17,9 +17,13 @@ class Get_Github_Info:
 
     def get_updated_file(self, time):
         response = requests.get('https://api.github.com/repos/{}/{}/commits?since={}Z'.format(self.username,self.repository,time)).json()# gets all of the commits within the last 5 mins
-        new_file = response[0]
-        json_commit = {'commit':[{'name':new_file['commit']['author']['name'],'comment_count':new_file['commit']['comment_count'],'message':new_file['commit']['message']}]}
-        print(json.loads(json_commit))
+        if len(response) == 0:
+            pass
+        else:
+            for i in range(len(response)):
+                new_file = response[i]
+                json_commit = {'commit':[{'name':new_file['commit']['author']['name'],'comment_count':new_file['commit']['comment_count'],'message':new_file['commit']['message']}]}
+                print(json_commit)
 
 g = Get_Github_Info()# starts the class
 while 1==1:
