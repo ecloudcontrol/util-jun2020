@@ -12,7 +12,7 @@ class Get_Github_Info:
     
     def wait_function(self):
         time_now = right_time() #gets the time
-        sleep(30) #waits 5 mins
+        sleep(300) #waits 5 mins
         return time_now #returns the time before 5 mins
 
     def get_updated_file(self, time):
@@ -22,7 +22,7 @@ class Get_Github_Info:
         else:
             for i in range(len(response)):
                 new_file = response[i]
-                json_commit = {'commit':[{'name':new_file['commit']['author']['name'],'comment_count':new_file['commit']['comment_count'],'message':new_file['commit']['message']}]}
+                json_commit = {'commit':[{'date':new_file['commit']['author']['date'],'email':new_file['commit']['author']['name'],'name':new_file['commit']['author']['name'],'comment_count':new_file['commit']['comment_count'],'message':new_file['commit']['message']}]}
                 print(json_commit)
 
 g = Get_Github_Info()# starts the class
