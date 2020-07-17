@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime 
 from pytz import timezone # imports timezones
 def right_time():
     fmt = "%Y-%m-%d %H:%M:%S" # formats the date and time
