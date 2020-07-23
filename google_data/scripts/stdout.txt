@@ -1,0 +1,14 @@
+       wiki                      title  views
+0        zu                   IsiGreki      1
+1        zu                 IsiKrowati      1
+2        zu      Lower_Gwelo,_Zimbabwe      1
+3        zu                     Juluka      1
+4        zu  File:BOL_orthographic.svg      1
+...     ...                        ...    ...
+13251  zh.m                    荷拉斯兄弟之誓      1
+13252  zh.m                   莫尼克·莱文斯基      1
+13253  zh.m                   莫尼加德尔加尔达      1
+13254  zh.m                菲利普_(比利时国王)      1
+13255  zh.m                      菲爾·艾菲      1
+
+[13256 rows x 3 columns]
