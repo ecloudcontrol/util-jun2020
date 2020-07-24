@@ -16,7 +16,10 @@ def get_data():
     except ImportError: 
         import collections as collections_abc
     number_of_responses = random.randrange(100,100000)# sets a random value of vlues to retrieve
-    wiki = pandas_gbq.read_gbq('SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "2020-07-22" AND TIME(datehour) = "20:00:00" LIMIT {}'.format(number_of_responses))
+    x = str(datetime.now())
+    hour = int(x[11:13]) - 1 # sets the hour back
+    date = x[:10]
+    wiki = pandas_gbq.read_gbq('SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,hour,number_of_responses))
     df = wiki.drop(["datehour"],axis=1)
     time = str(datetime.now())
 
@@ -25,9 +28,9 @@ def get_data():
     secs = time[17:19]
     dates = []
     for x in range(len(df)):
-        x = str(datetime.now())
-        hour = int(x[11:13]) - 1 # sets the hour back
-        date = x[:10]
+        x = str(datetime.now())#gets the date & time
+        hour = int(x[11:13]) - 1 #gets the hour
+        date = x[:10] # gets the date
         if int(mins) < 10 and len(str(mins)) < 2: #if there is less than 2 digits in the mins place it adds a 0 in front
             date_time = (str(date) + ' ' + str(hour) + ':'+ '0' + str(mins)+ ':' + str(secs))
             date_time_obj = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S') #formats the string into a date to be sorted later
@@ -50,7 +53,7 @@ def get_data():
     df['datehour'] = dates
     
     df=df.sort_values(by ='datehour' , ascending=True) # the dataframe is sorted by the date and time
-    pd.set_option("display.max_rows", None, "display.max_columns", None) # this shows the full data frame
+    #pd.set_option("display.max_rows", None, "display.max_columns", None) # this shows the full data frame
     df1 = df.reset_index() # deletes the old out of order index
     print(df1.drop(["index"],axis=1))
 
@@ -58,5 +61,5 @@ def get_data():
 
 while True:
     sleep_time = random.randrange(0,60)# set a random number of minutes between calls
-    sleep(sleep_time*60) #turns the minutes into seconds
+    #sleep(sleep_time*60) #turns the minutes into seconds
     get_data()
