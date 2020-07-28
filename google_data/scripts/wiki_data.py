@@ -5,8 +5,7 @@ import random
 from time import sleep
 from datetime import datetime
 def get_data():
-    credentials1 = service_account.Credentials.from_service_account_file('C:\\Users\\ssubh\\OneDrive\\Desktop\\cto\\github_prj\\Quickstart-c97bee3c4606.json')#gets the credentials
-    #C:\\Users\\ssubh\\OneDrive\\Desktop\\cto\\github_prj\\Quickstart-c97bee3c4606.json
+    credentials1 = service_account.Credentials.from_service_account_file('Quickstart-c97bee3c4606.json')#gets the credentials
     
     # Gets the info from google
     pandas_gbq.context.credentials = credentials1
