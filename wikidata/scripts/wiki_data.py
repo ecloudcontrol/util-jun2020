@@ -21,8 +21,6 @@ def get_data():
 
     pandas_gbq.context.project = "quickstart-1584643705530"
 
-
-
     try: 
 
         from collections import abc as collections_abc
@@ -30,8 +28,6 @@ def get_data():
     except ImportError: 
 
         import collections as collections_abc
-
-
 
     MIN = 100000
 
@@ -49,13 +45,15 @@ def get_data():
 
     date = datetime.now().strftime("%Y-%m-%d")
 
-    wiki = pandas_gbq.read_gbq('SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,hour,number_of_responses))
+    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,current_hour,number_of_responses)
+
+    wiki = pandas_gbq.read_gbq(query)
     
     df = wiki.drop(["datehour"],axis=1)
     
     start_of_batch=0
 
-    
+    #response returner
     while x < number_of_responses:
 
         BATCH_SIZE = random.randrange(0,10000)
