@@ -73,7 +73,7 @@ while True:
 
     date_hour_min = datetime.now().strftime('%Y-%m-%d %H:%M:00')
 
-    date_and_hour = datetime.now().strftime('%Y-%m-%d %H:42:00')
+    date_and_hour = datetime.now().strftime('%Y-%m-%d %H:03:00')
     
     if date_hour_min == date_and_hour:
        get_data()
