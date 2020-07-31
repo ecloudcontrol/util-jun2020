@@ -73,24 +73,9 @@ def get_data():
 
         sleep(BATCH_SLEEP)
     
-start_time =  60 - int(datetime.now().minute) 
-
-sleep(start_time * 60)
     
-get_data()
-
 while True:
 
-    sleep(360)
-
     get_data()
-
-
-
-
-
-
-    date_and_hour = datetime.now().strftime('%Y-%m-%d %H:03:00')
-    
-    if date_hour_min == date_and_hour:
-       get_data()
+    start_time = 60 - int(datetime.now().minute)
+    sleep(start_time * 60)
