@@ -90,3 +90,7 @@ while True:
 
 
 
+    date_and_hour = datetime.now().strftime('%Y-%m-%d %H:03:00')
+    
+    if date_hour_min == date_and_hour:
+       get_data()
