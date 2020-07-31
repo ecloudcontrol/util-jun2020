@@ -11,6 +11,15 @@ from time import sleep
 from datetime import datetime
 
 def get_data():
+    MIN = 100000
+
+    MAX = 1000000
+    
+    BATCH_SLEEP = 10
+
+    BATCH_SIZE = 10000
+
+
 
     path_to_credentials = 'Quickstart-c97bee3c4606.json'
 
@@ -29,9 +38,7 @@ def get_data():
 
         import collections as collections_abc
 
-    MIN = 100000
-
-    MAX = 1000000
+    
 
     number_of_responses = random.randrange(MIN, MAX)# sets a random value of vlues to retrieve
 
@@ -55,23 +62,33 @@ def get_data():
 
     #response returner
     while x < number_of_responses:
-
-        BATCH_SIZE = random.randrange(0,10000)
-
-        end_of_batch = BATCH_SIZE 
+ 
+        end_of_batch = BATCH_SIZE + start_of_batch
         
         print(df[start_of_batch:end_of_batch])
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
-        BATCH_SLEEP = 10
+        BATCH_SIZE = random.randrange(0,10000)
 
         sleep(BATCH_SLEEP)
     
+start_time =  60 - int(datetime.now().minute) 
+
+sleep(start_time * 60)
+    
+get_data()
 
 while True:
 
-    date_hour_min = datetime.now().strftime('%Y-%m-%d %H:%M:00')
+    sleep(360)
+
+    get_data()
+
+
+
+
+
 
     date_and_hour = datetime.now().strftime('%Y-%m-%d %H:03:00')
     
