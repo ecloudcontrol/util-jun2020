@@ -59,9 +59,9 @@ def get_data():
     df = wiki.drop(["datehour"],axis=1)
     
     start_of_batch=0
-
+    end_of_batch = 0
     #response returner
-    while x < number_of_responses:
+    while end_of_batch < number_of_responses:
  
         end_of_batch = BATCH_SIZE + start_of_batch
         
