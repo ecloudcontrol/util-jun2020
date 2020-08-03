@@ -19,16 +19,17 @@ def get_data():
 
     BATCH_SIZE = 10000
 
+    CRED_JSON_PATH = 'Quickstart-c97bee3c4606.json'
+    
+    PROJECT_NAME = "quickstart-1584643705530"
+    
 
-
-    path_to_credentials = 'Quickstart-c97bee3c4606.json'
-
-    credentials1 = service_account.Credentials.from_service_account_file( path_to_credentials )#gets the credentials
+    credentials1 = service_account.Credentials.from_service_account_file( CRED_JSON_PATH )#gets the credentials
     
     # Gets the info from google
     pandas_gbq.context.credentials = credentials1
 
-    pandas_gbq.context.project = "quickstart-1584643705530"
+    pandas_gbq.context.project = PROJECT_NAME
 
     try: 
 
