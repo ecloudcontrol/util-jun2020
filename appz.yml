@@ -20,5 +20,5 @@ deploy:
 properties:
   CRED_JSON_PATH:
     vault: CRED_JSON_PATH
-  revision: 2
+  revision: 3
   
