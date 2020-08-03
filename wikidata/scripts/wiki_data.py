@@ -38,8 +38,9 @@ def get_data():
     
 
     number_of_responses = random.randrange(MIN, MAX) # sets a random value of vlues to retrieve
+    print("number_of_responses:", number_of_responses)
 
-    current_hour = int(datetime.now().hour) - 1
+    current_hour = int(datetime.now().hour) - 4
 
     if current_hour < 0:
 
@@ -53,7 +54,7 @@ def get_data():
     wiki = pandas_gbq.read_gbq(query)
     
     df = wiki.drop(["datehour"], axis=1)
-    print("number_of_responses:", number_of_responses)
+    print("len(df):", len(df))
     
     start_of_batch=0
     end_of_batch = 0
