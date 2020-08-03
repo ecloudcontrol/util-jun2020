@@ -21,12 +21,11 @@ def get_data():
     path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
     print("Using credentials from ", path_to_credentials) 
 
-    credentials1 = service_account.Credentials.from_service_account_file( path_to_credentials )#gets the credentials
-    
     # Gets the info from google
-    pandas_gbq.context.credentials = credentials1
-
+    pandas_gbq.context.credentials = service_account.Credentials.from_service_account_file( path_to_credentials ) #gets the credentials
+    
     pandas_gbq.context.project = os.environ.get('PROJECT_NAME', "quickstart-1584643705530")
+    print("Project:", pandas_gbq.context.project)
 
     try: 
 
@@ -38,8 +37,7 @@ def get_data():
 
     
 
-    number_of_responses = random.randrange(MIN, MAX)# sets a random value of vlues to retrieve
-
+    number_of_responses = random.randrange(MIN, MAX) # sets a random value of vlues to retrieve
 
     current_hour = int(datetime.now().hour) - 1
 
@@ -49,15 +47,17 @@ def get_data():
 
 
     date = datetime.now().strftime("%Y-%m-%d")
-
     query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,current_hour,number_of_responses)
+    print("query:", query)
 
     wiki = pandas_gbq.read_gbq(query)
     
-    df = wiki.drop(["datehour"],axis=1)
+    df = wiki.drop(["datehour"], axis=1)
+    print("number_of_responses:", number_of_responses)
     
     start_of_batch=0
     end_of_batch = 0
+    
     #response returner
     while end_of_batch < number_of_responses:
  
