@@ -10,6 +10,8 @@ from time import sleep
 
 from datetime import datetime
 
+import json
+
 def get_data():
     MIN = 100000
 
@@ -21,9 +23,12 @@ def get_data():
 
     CRED_JSON_PATH = 'Quickstart-c97bee3c4606.json'
     
-    PROJECT_NAME = "quickstart-1584643705530"
+    with open(CRED_JSON_PATH, 'r') as CRED:
+        
+        full_credentials = json.load(CRED)
     
-
+    PROJECT_NAME = full_credentials['project_id']
+        
     credentials1 = service_account.Credentials.from_service_account_file( CRED_JSON_PATH )#gets the credentials
     
     # Gets the info from google
