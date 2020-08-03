@@ -19,6 +19,7 @@ def get_data():
     BATCH_SIZE = 10000
 
     path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
+    print("Using credentials from ", path_to_credentials) 
 
     credentials1 = service_account.Credentials.from_service_account_file( path_to_credentials )#gets the credentials
     
