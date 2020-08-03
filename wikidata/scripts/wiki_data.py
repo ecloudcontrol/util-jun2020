@@ -1,6 +1,7 @@
 import pandas as pd
-
 import pandas_gbq
+import os
+
 
 from google.oauth2 import service_account
 
@@ -21,14 +22,14 @@ def get_data():
 
 
 
-    path_to_credentials = 'Quickstart-c97bee3c4606.json'
+    path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
 
     credentials1 = service_account.Credentials.from_service_account_file( path_to_credentials )#gets the credentials
     
     # Gets the info from google
     pandas_gbq.context.credentials = credentials1
 
-    pandas_gbq.context.project = "quickstart-1584643705530"
+    pandas_gbq.context.project = os.environ.get('PROJECT_NAME', "quickstart-1584643705530")
 
     try: 
 
