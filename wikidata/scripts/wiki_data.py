@@ -12,15 +12,11 @@ from time import sleep
 from datetime import datetime
 
 def get_data():
+
     MIN = 100000
-
     MAX = 1000000
-    
     BATCH_SLEEP = 10
-
     BATCH_SIZE = 10000
-
-
 
     path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
 
