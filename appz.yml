@@ -1,0 +1,24 @@
+app:
+  code: WIKIDATA
+  name: WikiData
+  notify: appzdev@cloudbourne.co
+  
+build:
+  build_file: none
+  env: DEV
+  image_name: myco/wikidata
+  image_template: python-v3
+  output_files: output/*.zip
+  version: 0.2
+  
+deploy:
+  context: myco/DEV
+  port:
+  - 80
+  replicas: 1
+  
+properties:
+  CRED_JSON_PATH:
+    vault: CRED_JSON_PATH
+  revision: 2
+  
