@@ -62,13 +62,22 @@ def get_data():
     while start_of_batch < number_of_responses:
  
         for i in range(BATCH_SIZE):
-            print('record:' + str(df.index[i + start_of_batch]) + 
+            try: 
+                print('record:' + str(df.index[i + start_of_batch]) + 
 
-            ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
+                ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
 
-            ', title:' + str(df['title'][i + start_of_batch]) + 
-            
-            ', views: n/a' )
+                ', title:' + str(df['title'][i + start_of_batch]) + 
+                
+                ', views: '+ str(df['views'][i + start_of_batch]))
+            except UnicodeEncodeError:
+                print('record:' + str(df.index[i + start_of_batch]) + 
+
+                ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
+
+                ', title:' + str(df['title'][i + start_of_batch]) + 
+                
+                ', views: n/a')
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
