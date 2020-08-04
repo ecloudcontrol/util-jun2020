@@ -63,21 +63,30 @@ def get_data():
  
         for i in range(BATCH_SIZE):
             try: 
-                print('record:' + str(df.index[i + start_of_batch]) + 
-
-                ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
-
-                ', title:' + str(df['title'][i + start_of_batch]) + 
-                
-                ', views: '+ str(df['views'][i + start_of_batch]))
+                df_record = str(df.index[i + start_of_batch])
+            
             except UnicodeEncodeError:
-                print('record:' + str(df.index[i + start_of_batch]) + 
+                df_record = "n/a"
+            
+            try: 
+                df_wiki = str(df['wiki'][i + start_of_batch])
+            
+            except UnicodeEncodeError:
+                df_wiki = "n/a"
 
-                ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
+            try: 
+                df_title = str(df['title'][i + start_of_batch])
+            
+            except UnicodeEncodeError:
+                df_title = "n/a"
 
-                ', title:' + str(df['title'][i + start_of_batch]) + 
-                
-                ', views: n/a')
+            try: 
+                df_views = str(df['title'][i + start_of_batch])
+            
+            except UnicodeEncodeError:
+                df__views = "n/a"
+
+            print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
