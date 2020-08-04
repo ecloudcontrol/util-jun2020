@@ -49,7 +49,7 @@ def get_data():
         date_now = date.today() - timedelta(days=1)
 
 
-    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date_now,current_hour,number_of_responses)
+    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" AND wiki= "en" LIMIT {}'.format(date_now,current_hour,number_of_responses)
     print("query:", query)
 
     wiki = pandas_gbq.read_gbq(query)
