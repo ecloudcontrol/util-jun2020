@@ -68,7 +68,7 @@ def get_data():
 
             ', title:' + str(df['title'][i + start_of_batch]) + 
             
-            ', views:' + str(df['views'][i + start_of_batch]))
+            ', views: n/a' )
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
