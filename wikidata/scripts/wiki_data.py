@@ -69,7 +69,7 @@ def get_data():
 
         sleep(BATCH_SLEEP)
     
-sys.setdefaultencoding('UTF8')
+print(sys.getdefaultencoding())
 
 while True:
 
