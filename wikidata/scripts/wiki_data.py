@@ -44,8 +44,7 @@ def get_data():
 
     if current_hour < 0:
 
-        current_hour = 23
-
+        current_hour = 24 + current_hour
 
     date = datetime.now().strftime("%Y-%m-%d")
     query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,current_hour,number_of_responses)
