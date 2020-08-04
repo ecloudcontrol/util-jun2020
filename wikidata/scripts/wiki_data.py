@@ -61,7 +61,7 @@ def get_data():
    
     
     #response returner
-    while end_of_batch < number_of_responses:
+    while start_of_batch < number_of_responses:
  
         for i in range(BATCH_SIZE):
             print('record:' + str(df.index[i + start_of_batch]) +  #record: 'index'
