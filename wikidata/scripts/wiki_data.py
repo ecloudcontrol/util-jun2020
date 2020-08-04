@@ -9,7 +9,7 @@ import random
 
 from time import sleep
 
-from datetime import datetime
+from datetime import datetime, timedelta, date
 
 def get_data():
 
@@ -41,14 +41,15 @@ def get_data():
     print("number_of_responses:", number_of_responses)
 
     current_hour = int(datetime.now().hour) - 4
+    date_now = datetime.now().strftime("%Y-%m-%d")
 
     if current_hour < 0:
 
-        current_hour = 23
+        current_hour = 24 + current_hour
+        date_now = date.today() - timedelta(days=1)
 
 
-    date = datetime.now().strftime("%Y-%m-%d")
-    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date,current_hour,number_of_responses)
+    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" LIMIT {}'.format(date_now,current_hour,number_of_responses)
     print("query:", query)
 
     wiki = pandas_gbq.read_gbq(query)
