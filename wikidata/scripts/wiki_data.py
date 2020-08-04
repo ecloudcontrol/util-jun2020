@@ -57,20 +57,20 @@ def get_data():
     df = wiki.drop(["datehour"], axis=1)
     print("len(df):", len(df))
     
-    start_of_batch=0
-   
-    
+    start_of_batch=0    
     #response returner
     while start_of_batch < number_of_responses:
  
         for i in range(BATCH_SIZE):
-            print('record:' + str(df.index[i + start_of_batch]) +  #record: 'index'
+            print('record:' + str(df.index[i + start_of_batch]) + 
 
-            ', wiki:' + str(df['wiki'][i + start_of_batch]) +  #wiki: 'wiki
+            ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
 
-            ', title:' + str(df['title'][i + start_of_batch]) +  #wiki: 'title'
+            ', title:' + str(df['title'][i + start_of_batch]) + 
             
-            ', views:' + str(df['views'][i + start_of_batch])) #views: 'views' 
+            ', views:' + str(df['views'][i + start_of_batch]))
+
+        start_of_batch = start_of_batch + BATCH_SIZE
 
         BATCH_SIZE = random.randrange(0,10000)
 
