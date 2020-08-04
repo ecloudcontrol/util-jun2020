@@ -58,16 +58,19 @@ def get_data():
     print("len(df):", len(df))
     
     start_of_batch=0
-    end_of_batch = 0
+   
     
     #response returner
     while end_of_batch < number_of_responses:
  
-        end_of_batch = BATCH_SIZE + start_of_batch
-        
-        print(df[start_of_batch:end_of_batch])
+        for i in range(BATCH_SIZE):
+            print('record:' + str(df.index[i + start_of_batch]) +  #record: 'index'
 
-        start_of_batch = start_of_batch + BATCH_SIZE
+            ', wiki:' + str(df['wiki'][i + start_of_batch]) +  #wiki: 'wiki
+
+            ', title:' + str(df['title'][i + start_of_batch]) +  #wiki: 'title'
+            
+            ', views:' + str(df['views'][i + start_of_batch])) #views: 'views' 
 
         BATCH_SIZE = random.randrange(0,10000)
 
