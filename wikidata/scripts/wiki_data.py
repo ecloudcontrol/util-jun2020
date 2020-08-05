@@ -58,19 +58,29 @@ def get_data():
     while start_of_batch < number_of_responses:
  
         for i in range(BATCH_SIZE):
-            print('record:' + str(df.index[i + start_of_batch]) + 
+        
+            df_record = toStr(df.index[i + start_of_batch])
 
-            ', wiki:' + str(df['wiki'][i + start_of_batch]) + 
-
-            ', title:' + str(df['title'][i + start_of_batch]) + 
+            df_wiki = toStr(df['wiki'][i + start_of_batch])
             
-            ', views:' + str(df['views'][i + start_of_batch]))
+            df_title = toStr(df['title'][i + start_of_batch])
+            
+            df_views = toStr(df['views'][i + start_of_batch])
+
+            print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
         BATCH_SIZE = random.randrange(0,10000)
 
         sleep(BATCH_SLEEP)
+        
+def toStr(value):
+    try:
+        return str(value)
+    except UnicodeEncodeError:
+        return "n/a"  
+    
     
 print(sys.getdefaultencoding())
 
