@@ -1,14 +1,10 @@
 import pandas as pd
 import pandas_gbq
 import os
-
-
-from google.oauth2 import service_account
-
+import sys
 import random 
-
+from google.oauth2 import service_account
 from time import sleep
-
 from datetime import datetime, timedelta, date
 
 def get_data():
@@ -85,6 +81,9 @@ def toStr(value):
     except UnicodeEncodeError:
         return "n/a"  
     
+    
+print(sys.getdefaultencoding())
+
 while True:
 
     get_data()
