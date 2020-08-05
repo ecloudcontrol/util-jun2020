@@ -59,7 +59,7 @@ def get_data():
  
         end_of_batch = start_of_batch + BATCH_SIZE
 
-        if end_of_batch > number_of_responses
+        if end_of_batch > number_of_responses:
             end_of_batch = number_of_responses
 
         for i in range(end_of_batch - start_of_batch):
