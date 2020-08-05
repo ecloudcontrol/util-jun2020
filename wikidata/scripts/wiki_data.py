@@ -56,6 +56,12 @@ def get_data():
     start_of_batch=0    
     #response returner
     while start_of_batch < number_of_responses:
+        
+        batch_size_test = start_of_batch + BATCH_SIZE
+
+        if batch_size_test > number_of_responses:
+
+            BATCH_SIZE = number_of_responses - start_of_batch
  
         for i in range(BATCH_SIZE):
         
