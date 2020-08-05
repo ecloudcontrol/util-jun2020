@@ -77,10 +77,13 @@ def get_data():
         
 def toStr(value):
     try:
-        return str(value)
+
+        return "{}".format(value)
+
     except UnicodeEncodeError:
+
         return "n/a"  
-    
+
     
 print(sys.getdefaultencoding())
 
