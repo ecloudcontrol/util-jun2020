@@ -78,7 +78,7 @@ def get_data():
 def toStr(value):
     try:
 
-        return "{}".format(value)
+        return str(value).encode(encoding='ascii', errors='ignore').decode('ascii')
 
     except UnicodeEncodeError:
 
