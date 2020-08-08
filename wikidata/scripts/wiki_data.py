@@ -107,4 +107,5 @@ while True:
 
     get_data()
     start_time = 60 - int(datetime.now().minute)
+    print("outer loop sleep: {}".format(start_time))
     sleep(start_time * 60)
