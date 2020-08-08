@@ -64,15 +64,21 @@ def get_data():
 
         for i in range(end_of_batch - start_of_batch):
         
-            df_record = toStr(df.index[i + start_of_batch])
+            try :
 
-            df_wiki = toStr(df['wiki'][i + start_of_batch])
-            
-            df_title = toStr(df['title'][i + start_of_batch])
-            
-            df_views = toStr(df['views'][i + start_of_batch])
+                df_record = toStr(df.index[i + start_of_batch])
 
-            print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
+                df_wiki = toStr(df['wiki'][i + start_of_batch])
+                
+                df_title = toStr(df['title'][i + start_of_batch])
+                
+                df_views = toStr(df['views'][i + start_of_batch])
+
+                print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
+
+            except:
+
+                print("Unexpected error:", sys.exc_info()[0])
 
         start_of_batch = start_of_batch + BATCH_SIZE
 
