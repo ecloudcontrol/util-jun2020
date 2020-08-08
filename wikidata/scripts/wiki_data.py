@@ -62,6 +62,8 @@ def get_data():
         if end_of_batch > number_of_responses:
             end_of_batch = number_of_responses
 
+        print("batch start: {} to {} ({})".format(start_of_batch, end_of_batch, BATCH_SIZE))
+
         for i in range(end_of_batch - start_of_batch):
         
             try :
@@ -80,10 +82,13 @@ def get_data():
 
                 print("Unexpected error:", sys.exc_info()[0])
 
+        print("batch end: {} to {}".format(start_of_batch, end_of_batch))
+
         start_of_batch = start_of_batch + BATCH_SIZE
 
         BATCH_SIZE = random.randrange(0,10000)
 
+        print("batch sleep: {}".format(BATCH_SLEEP))
         sleep(BATCH_SLEEP)
         
 def toStr(value):
