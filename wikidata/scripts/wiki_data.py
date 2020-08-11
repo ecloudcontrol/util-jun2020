@@ -9,10 +9,10 @@ from datetime import datetime, timedelta, date
 
 def get_data():
 
-    MIN = 100000
-    MAX = 1000000
-    BATCH_SLEEP = 10
-    BATCH_SIZE = 10000
+    MIN = int(os.environ.get('FETCH_MIN', "10000"))
+    MAX = int(os.environ.get('FETCH_MAX', "100000"))
+    BATCH_SLEEP = int(os.environ.get('BATCH_SLEEP', "10"))
+    BATCH_SIZE = int(os.environ.get('BATCH_SIZE', "1000"))
 
     path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
     print("Using credentials from ", path_to_credentials) 
