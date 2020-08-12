@@ -18,6 +18,10 @@ deploy:
   replicas: 1
   
 properties:
+  FETCH_MIN: 30000
+  FETCH_MAX: 300000
+  BATCH_SLEEP: 10
+  BATCH_SIZE: 10000
   CRED_JSON_PATH:
     vault: CRED_JSON_PATH
   revision: 3
