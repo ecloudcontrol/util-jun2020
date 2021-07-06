@@ -14,7 +14,8 @@ def get_data():
     BATCH_SLEEP = 10
     BATCH_SIZE = 10000
 
-    path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
+    path_to_credentials = 'quickstart-1584643705530-af0712b55af8.json'
+
     print("Using credentials from ", path_to_credentials) 
 
     # Gets the info from google
@@ -31,8 +32,6 @@ def get_data():
 
         import collections as collections_abc
 
-    
-
     number_of_responses = random.randrange(MIN, MAX) # sets a random value of vlues to retrieve
     print("number_of_responses:", number_of_responses)
 
@@ -44,42 +43,13 @@ def get_data():
         current_hour = 24 + current_hour
         date_now = date.today() - timedelta(days=1)
 
+    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2021`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" AND wiki= "en" LIMIT {}'.format(date_now,current_hour,number_of_responses)
 
-    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" AND wiki= "en" LIMIT {}'.format(date_now,current_hour,number_of_responses)
     print("query:", query)
 
     wiki = pandas_gbq.read_gbq(query)
     
-    df = wiki.drop(["datehour"], axis=1)
-    print("len(df):", len(df))
-    
-    start_of_batch=0    
-    #response returner
-    while start_of_batch < number_of_responses:
-        
-        batch_size_test = start_of_batch + BATCH_SIZE
-
-        if batch_size_test > number_of_responses:
-
-            BATCH_SIZE = number_of_responses - start_of_batch
- 
-        for i in range(BATCH_SIZE):
-        
-            df_record = toStr(df.index[i + start_of_batch])
-
-            df_wiki = toStr(df['wiki'][i + start_of_batch])
-            
-            df_title = toStr(df['title'][i + start_of_batch])
-            
-            df_views = toStr(df['views'][i + start_of_batch])
-
-            print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
-
-        start_of_batch = start_of_batch + BATCH_SIZE
-
-        BATCH_SIZE = random.randrange(0,10000)
-
-        sleep(BATCH_SLEEP)
+    print(wiki)
         
 def toStr(value):
     try:
