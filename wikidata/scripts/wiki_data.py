@@ -9,10 +9,10 @@ from datetime import datetime, timedelta, date
 
 def get_data():
 
-    MIN = 100000
-    MAX = 1000000
-    BATCH_SLEEP = 10
-    BATCH_SIZE = 10000
+    MIN = int(os.environ.get('FETCH_MIN', "10000"))
+    MAX = int(os.environ.get('FETCH_MAX', "100000"))
+    BATCH_SLEEP = int(os.environ.get('BATCH_SLEEP', "10"))
+    BATCH_SIZE = int(os.environ.get('BATCH_SIZE', "1000"))
 
     path_to_credentials = 'quickstart-1584643705530-af0712b55af8.json'
 
@@ -50,13 +50,56 @@ def get_data():
     wiki = pandas_gbq.read_gbq(query)
     
     print(wiki)
+    df = wiki.drop(["datehour"], axis=1)
+    print("len(df):", len(df))
+    
+    start_of_batch=0    
+    #response returner
+    while start_of_batch < number_of_responses:
+ 
+        end_of_batch = start_of_batch + BATCH_SIZE
+
+        if end_of_batch > number_of_responses:
+            end_of_batch = number_of_responses
+
+        print("batch start: {} to {} ({})".format(start_of_batch, end_of_batch, BATCH_SIZE))
+
+        for i in range(end_of_batch - start_of_batch):
+        
+            try :
+
+                df_record = toStr(df.index[i + start_of_batch])
+
+                df_wiki = toStr(df['wiki'][i + start_of_batch])
+                
+                df_title = toStr(df['title'][i + start_of_batch])
+                
+                df_views = toStr(df['views'][i + start_of_batch])
+
+                print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
+
+            except:
+
+                print("Unexpected error:", sys.exc_info()[0])
+
+        print("batch end: {} to {}".format(start_of_batch, end_of_batch))
+
+        start_of_batch = start_of_batch + BATCH_SIZE
+
+        BATCH_SIZE = random.randrange(0,10000)
+
+        print("batch sleep: {}".format(BATCH_SLEEP))
+        sleep(BATCH_SLEEP)
         
 def toStr(value):
     try:
-        return str(value)
+
+        return str(value).encode(encoding='ascii', errors='ignore').decode('ascii')
+
     except UnicodeEncodeError:
+
         return "n/a"  
-    
+
     
 print(sys.getdefaultencoding())
 
@@ -64,4 +107,5 @@ while True:
 
     get_data()
     start_time = 60 - int(datetime.now().minute)
+    print("outer loop sleep: {}".format(start_time))
     sleep(start_time * 60)
