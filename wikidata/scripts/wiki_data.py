@@ -14,7 +14,8 @@ def get_data():
     BATCH_SLEEP = int(os.environ.get('BATCH_SLEEP', "10"))
     BATCH_SIZE = int(os.environ.get('BATCH_SIZE', "1000"))
 
-    path_to_credentials = os.environ.get('CRED_JSON_PATH', 'Quickstart-c97bee3c4606.json')
+    path_to_credentials = 'quickstart-1584643705530-af0712b55af8.json'
+
     print("Using credentials from ", path_to_credentials) 
 
     # Gets the info from google
@@ -31,8 +32,6 @@ def get_data():
 
         import collections as collections_abc
 
-    
-
     number_of_responses = random.randrange(MIN, MAX) # sets a random value of vlues to retrieve
     print("number_of_responses:", number_of_responses)
 
@@ -44,12 +43,13 @@ def get_data():
         current_hour = 24 + current_hour
         date_now = date.today() - timedelta(days=1)
 
+    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2021`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" AND wiki= "en" LIMIT {}'.format(date_now,current_hour,number_of_responses)
 
-    query = 'SELECT * FROM `bigquery-public-data.wikipedia.pageviews_2020`  WHERE DATE(datehour) = "{}" AND TIME(datehour) = "{}:00:00" AND wiki= "en" LIMIT {}'.format(date_now,current_hour,number_of_responses)
     print("query:", query)
 
     wiki = pandas_gbq.read_gbq(query)
     
+    print(wiki)
     df = wiki.drop(["datehour"], axis=1)
     print("len(df):", len(df))
     
