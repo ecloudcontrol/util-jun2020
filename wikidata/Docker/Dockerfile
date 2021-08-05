@@ -1,10 +1,15 @@
-FROM python:3.7-alpine
-WORKDIR /wiki
-ENV FLASK_APP=wikiApp.py
-ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt -vvv
-EXPOSE 5000
-COPY . .
-CMD ["flask", "run"]
+FROM python:3
+
+RUN mkdir /wikiApp1/
+
+WORKDIR /wikiApp1/
+
+COPY ./requirements.txt /wikiApp1/requirements.txt
+
+RUN pip install -r requirements.txt -v
+
+COPY ./ /wikiApp1/
+
+ENV FLASK_APP=wiki-app.py
+
+CMD flask run -h 0.0.0 -p 5000
