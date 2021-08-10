@@ -12,5 +12,3 @@ COPY ./ /wikiApp1/
 ENV FLASK_APP=wiki-app.py
 CMD flask run -h 0.0.0 -p 5000
 
-
-#FLASK_APP=wikiApp:name
