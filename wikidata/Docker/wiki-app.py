@@ -1,3 +1,4 @@
+import threading
 import pandas as pd
 import pandas_gbq
 import os
@@ -28,14 +29,13 @@ def toStr(value):
         return str(value)
     except UnicodeEncodeError:
         return "n/a"
-        
-@wikiApp1.route('/')
+
 def get_data():
     while True:
 
         MIN = 100000
         MAX = 1000000
-        BATCH_SLEEP = 30   # change back to 10
+        BATCH_SLEEP = 10   # change back to 10
         BATCH_SIZE = 10000
 
         path_to_credentials = 'quickstart-1584643705530-af0712b55af8.json'
@@ -78,8 +78,9 @@ def get_data():
 
         df = wiki.drop(["datehour"], axis=1)
         print("len(df):", len(df))
-        
-        start_of_batch=0    
+        metrics['c'].inc(len(df)) # sends the metric of number of responses
+
+        start_of_batch = 0    
         #response returner
         while start_of_batch < number_of_responses:
     
@@ -104,7 +105,7 @@ def get_data():
 
                     print('record: ' + df_record +  ', wiki: ' + df_wiki +  ', title: ' + df_title +  ', views: ' + df_views)
 
-                    metrics['v'].inc(6)
+                    metrics['v'].inc(int(df['views'][i + start_of_batch]))
 
                 except:
 
@@ -120,10 +121,16 @@ def get_data():
             sleep(BATCH_SLEEP)
         #eturn(toStr(wiki))
 
-        #start_time = 60 - int(datetime.now().minute)
-        #sleep(start_time * 60)
+        start_time = 60 - int(datetime.now().minute)
+        sleep(start_time * 60)
 
-        return('done')
+thread1 = threading.Thread(target=get_data) # creates the thread
+thread1.start() # starts the thread
+
+        
+@wikiApp1.route('/')
+def home_screen():
+    return('done')
         
     
         
