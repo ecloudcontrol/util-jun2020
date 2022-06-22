@@ -1,5 +1,5 @@
 flask
-numpy==1.18
+numpy==1.22.0
 pandas
 prometheus_client
 pandas-gbq==0.15.0
