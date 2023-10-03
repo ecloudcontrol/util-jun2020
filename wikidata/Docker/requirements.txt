@@ -3,4 +3,4 @@ numpy==1.18
 pandas
 prometheus_client
 pandas-gbq==0.15.0
-pillow==5.1.0
+pillow==10.0.1
